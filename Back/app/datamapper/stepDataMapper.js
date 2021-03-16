@@ -27,12 +27,10 @@ const stepDataMapper = {
         // 2 - search if the pair trip/country exists en table m2m
         const idCountry = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newStep.country_code]);
 
-
         const tripCountry = await client.query(`SELECT "_m2m_trip_country"."id" FROM "_m2m_trip_country" JOIN "country" ON "country"."id" = "_m2m_trip_country"."country_id" WHERE "_m2m_trip_country"."trip_id" = $1 AND "_m2m_trip_country"."country_id" = $2`,
             [newStep.trip_id,
                 idCountry.rows[0].id
             ])
-
 
         if (!tripCountry.rows[0]) {
 

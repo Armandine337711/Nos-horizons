@@ -18,6 +18,6 @@ router.patch('/addFavorite/:tripId');
 //router.patch('/', jwt, tripController.updateAllTrip);
 router.patch('/:tripId', tripController.updateOneTrip);
 //router.delete('/', jwt, tripController.deleteAllTrip);
-router.delete('/:tripId', tripController.deleteOneTrip);
+router.delete('/:tripId', jwt, tripController.deleteOneTrip);
 
 module.exports = router;

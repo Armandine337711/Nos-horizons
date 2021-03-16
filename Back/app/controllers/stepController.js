@@ -16,8 +16,7 @@ const stepController = {
         try {
             const newStep = request.body;
             const stepTripId = await stepDataMapper.createStep(newStep);
-            // je récupère l'id de l'étape et l'id de l'user ou l'id du trip
-            //  dans request.file j'insère en bouclant sur le file dans la table photo
+
             const trip = await tripStepDataMapper.getTripById(stepTripId);
             const steps = await stepDataMapper.getStepByTripId(stepTripId);
             response.json({

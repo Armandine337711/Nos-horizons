@@ -1,5 +1,6 @@
 import {
-  CHANGE_ADDTRIP_FIELD, POST_NEW_TRIP_SUCCESS
+  CHANGE_ADDTRIP_FIELD,
+  POST_NEW_TRIP_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -24,13 +25,13 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         title: action.trip.title,
-        summary: action.trip.summary,
-        localisation: action.trip.country,
-        coverpicture: action.trip.cover_picture,
-        categories: action.trip.categories,
-        departure_date: action.trip.departure,
-        arrival_date: action.trip.returndate,
-        member_id: action.trip.member_id
+          summary: action.trip.summary,
+          localisation: action.trip.country,
+          coverpicture: action.trip.cover_picture,
+          categories: action.trip.categories,
+          departure_date: action.trip.departure,
+          arrival_date: action.trip.returndate,
+          member_id: action.trip.member_id,
       };
     default:
       return oldState;

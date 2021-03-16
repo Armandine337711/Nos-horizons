@@ -37,15 +37,16 @@ const countries = require('./import_country.json');
                                         trip,
                                         docket,
                                         country RESTART IDENTITY CASCADE`);
+    console.log('truncate');
 
     for (let docket of dockets) {
         const result = await client.query(`INSERT INTO docket(role_name) VALUES ($1) RETURNING *`, [docket.role_name]);
     };
-
+    console.log('docket');
     for (let country of countries) {
         await client.query(`INSERT INTO country(code, en_name, fr_name, code_2) VALUES ($1, $2, $3, $4)`, [country.code, country.en_name, country.fr_name, country.code_2])
     }
-
+    console.log('countr')
     // 2 - Import des catégories
     for (let category of categories) {
 
@@ -56,7 +57,7 @@ const countries = require('./import_country.json');
             ])
 
     };
-
+    console.log('category')
     // 3 - Import des localisation
     for (let localisation of localisations) {
         await client.query(`INSERT INTO "localisation"("country", "region", "city") VALUES ($1, $2, $3)`,
@@ -67,7 +68,7 @@ const countries = require('./import_country.json');
 
     }
     // 4 - Import de la photo bannière par défaut (user et trip)  
-
+    console.log('localisation')
     for (let photo of photos) {
         client.query(`INSERT INTO "photo"("title", "url") VALUES ($1, $2)`,
             [photo.title,
@@ -75,7 +76,7 @@ const countries = require('./import_country.json');
             ])
 
     }
-
+    console.log('photo')
     // 5 - Import des membres
     const saltRounds = 10;
 
@@ -96,7 +97,7 @@ const countries = require('./import_country.json');
             ])
 
     }
-
+    console.log('member')
     // 7 - Import des voyages
     for (let trip of trips) {
         await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "score", "photo_id", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
@@ -111,6 +112,7 @@ const countries = require('./import_country.json');
                 trip.cover_trip
             ])
     }
+    console.log('trip')
     // 8 - Import des étapes
     for (let step of steps) {
         await client.query(`INSERT INTO "step"("longitude", "latitude", "title", "number_step", "content", "trip_id", "country_id") VALUES ($1, $2, $3, $4, $5, $6, $7)`,
@@ -124,6 +126,7 @@ const countries = require('./import_country.json');
                 step.country_id
             ])
     }
+    console.log('step')
     // 9 - Import des commentaires
     /* for (const comment of comments) {
          await client.query(`INSERT INTO "comment"("title", "content", "score", "member_id", "trip_id") VALUES ($1, $2, $3, $4, $5)`,
@@ -142,13 +145,14 @@ const countries = require('./import_country.json');
             [tripCategory.category_id, tripCategory.trip_id])
     }
 
-
+    console.log('tripCategory')
 
 
     for (const tripCountry of tripCountries) {
         await client.query(`INSERT INTO "_m2m_trip_country"("country_id", "trip_id") VALUES ($1, $2)`,
             [tripCountry.country_id, tripCountry.trip_id])
     }
+    console.log('tripCountry')
     for (let photo of photos) {
         let photoId = photo.id;
         client.query(`UPDATE "photo" SET "step_id" = $1 WHERE id = $2`,
@@ -157,7 +161,7 @@ const countries = require('./import_country.json');
                 photoId
             ])
     }
-
+    console.log('photo')
 
 })();
 // 10 - Import de la table m2m trip localisation

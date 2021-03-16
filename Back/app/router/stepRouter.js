@@ -1,6 +1,7 @@
 const express = require('express');
 
 const stepController = require('../controllers/stepController');
+const jwt = require('../middleware/auth');
 
 const router = express.Router();
 
