@@ -3,12 +3,14 @@ const jwt = require('../middleware/auth');
 
 const memberController = require('../controllers/memberController');
 const router = express.Router();
+const memberSchema = require('../validation/schema/addMember');
+const {validateBody} = require('../validation/validationMiddleware');
 
 router.get('/', memberController.getAllMember);
 //router.get('/', jwt, memberController.getAllMember);
 router.get('/:memberId', memberController.getOneMember);
 //router.get('/:memberId', jwt, memberController.getOneMember);
-router.post('/', memberController.createMember);
+router.post('/', validateBody(memberSchema), memberController.createMember);
 router.patch('/', memberController.updateAllMember);
 
 router.patch('/:memberId', memberController.updateOneMember); // toutes les infos sauf pw, profilephoto et bannnière eet la biography
