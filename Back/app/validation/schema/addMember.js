@@ -2,7 +2,7 @@ const Joi = require ('joi');
 const memberDataMapper= require ('../../datamapper/memberDataMapper');
 
 const textOnlyPattern = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-\s]+$/;
-const passwordPattern = /^(?=.+[a-z])(?=.+[A-Z])(?=.+\\d)(?=.+[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/;
+const passwordPattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)(?=.*?[#?!@$%^&*-.]).{8,}$/
 const requireMessage = 'Ce champ est obligatoire';
 
 const memberSchema = Joi.object({
@@ -22,7 +22,6 @@ const memberSchema = Joi.object({
     password: Joi.string().regex(passwordPattern).strip().required().messages({
         'string.pattern.base': 'Le mot de passe doit contenir au moins 8 caractères avec minimum une majuscule, une minuscule et un caractère spécial',
         'any.require': requireMessage}),
-    profile_photo: Joi.string().uri().allow('')
-})
+    })
 
 module.exports = memberSchema;
