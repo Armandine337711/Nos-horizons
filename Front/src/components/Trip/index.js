@@ -46,7 +46,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, 
     }
     // Sinon on l'ajoute au tableau des catégories
     setValues([e.target.name],[...categories, clickedCategory]);
-  }
+  },
 
   // Gestion modale suppression carnet
   const[showDelete, setShowDelete] = useState(false);

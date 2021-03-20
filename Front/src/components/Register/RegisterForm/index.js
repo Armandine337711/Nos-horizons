@@ -5,6 +5,7 @@ import {
   Container, Form, Button, Alert, Spinner,
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import patternValidation from '../../../../../validate/patternsValidation'
 
 import './registerForm.scss';
 
@@ -45,6 +46,10 @@ const Register = ({
             ref={register({
               // si le champ n'est pas rempli lors de la soumission, le champ se met en focus
               required: 'Veuillez remplir ce champ !',
+              pattern: {
+                value: patternValidation.alphanumPattern,
+                message: 'Ce champ doit contenir au moins 6 lettres ou chiffres',
+              },
             })}
           />
           {errors.nickname && <div className="text-danger mb-2">{errors.nickname.message}</div>}
@@ -58,6 +63,9 @@ const Register = ({
             onChange={(e) => handleChange(e)}
             ref={register({
               required: 'Veuillez remplir ce champ !',
+              pattern: {
+                value: patternValidation.textOnlyPattern,
+                message: 'Ce champ ne doit contenir que des lettres et des -'
             })}
           />
           {errors.lastname && <div className="text-danger">{errors.lastname.message}</div>}
@@ -71,6 +79,9 @@ const Register = ({
             onChange={(e) => handleChange(e)}
             ref={register({
               required: 'Veuillez remplir ce champ !',
+              pattern: {
+                value: patternValidation.textOnlyPattern,
+                message: 'Ce champ ne doit contenir que des lettres et des -'
             })}
           />
           {errors.firstname && <div className="text-danger">{errors.firstname.message}</div>}
