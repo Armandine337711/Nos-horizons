@@ -1,5 +1,4 @@
 const Joi = require ('joi');
-const memberDataMapper= require ('../../datamapper/memberDataMapper');
 
 const textOnlyPattern = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-\s]+$/;
 const passwordPattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)(?=.*?[#?!@$%^&*-.]).{8,}$/

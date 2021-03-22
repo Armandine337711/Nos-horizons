@@ -3,6 +3,8 @@ const express = require('express');
 const jwt = require('../middleware/auth');
 
 const tripController = require('../controllers/tripController');
+const memberSchema = require('../validation/validationMiddleware');
+const {validateBody} = require('../validation/validationMiddleware');
 
 const router = express.Router();
 
